@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<div class="jumbotron">
+		<div class="row">
+			<div class="col-sm-12 col-md-5">
+				<h4>Video Game Systems</h4>
+				<hr align="left">
+				<ul>
+					{% for category in categories %}
+						<a href="{{url_for('showCategory', catalog_id = category.id )}}">
+							<li>{{category.name}}</li>
+						</a>
+					{% endfor %}
+				</ul>
+			</div>
+			<div class="col-sm-12 col-md-7">
+				<h4>Latest Games Added</h4>
+				<hr align="left">
+				<ul>
+					{% for categoryItem in categoryItems %}
+						<a href="{{url_for('showCategoryItem', catalog_id = categoryItem.category_id ,item_id = categoryItem.id )}}">
+							<li>{{categoryItem.name}} ({{categoryItem.category.name}})</li>
+						</a>
+					{% endfor %}
+				</ul>
+
+				{% if 'username' in session %}
+					<a href="{{url_for('addCategoryItem')}}" class="btn btn-primary float-right">Add Game</a>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+
+{% endblock %}

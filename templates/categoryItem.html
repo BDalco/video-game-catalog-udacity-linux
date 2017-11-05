@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<div class="jumbotron">
+		<div class="row">
+			<div class="col-sm-12">
+				<h4>{{categoryItem.name}}</h4>
+				<hr align="left">
+				<p>{{categoryItem.description}}</p>
+				<a href="{{url_for('showCategory', catalog_id = categoryItem.category_id)}}" class="btn btn-primary float-left">Back</a>
+				{% if 'username' in session and creator.id == session['user_id'] %}
+					<a href="{{url_for('editCategoryItem', catalog_id = categoryItem.category_id, item_id = categoryItem.id)}}" class="btn btn-primary float-right">Edit</a>
+					<a href="{{url_for('deleteCategoryItem', catalog_id = categoryItem.category_id, item_id = categoryItem.id)}}" class="btn btn-primary float-right">Delete</a>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+
+{% endblock %}
